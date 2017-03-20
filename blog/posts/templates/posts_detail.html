@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+	{% if post.image %}
+	<div class='col-sm-6 col-sm-offset-3'>
+		<img src='{{ post.image.url }}' class='img-responsive' />
+	</div>
+	{% endif %}
+</div>
+
+<div class="row">
+
+	<div class="jumbotron">
+		{% if post.draft %}
+		<small><span style='color:blue;'>Draft</span></small>
+		{% endif %}
+		<h3>This is post {{ post.title }} <small>{{ post.publish|timesince }}</small></h3>
+		<p>Author : {{ post.user }}</p>
+		<div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+		<br>
+		<p>{{ post.content|safe }}</p>
+
+	</div>
+</div>
+
+<div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="1"></div>
+{% endblock %}
